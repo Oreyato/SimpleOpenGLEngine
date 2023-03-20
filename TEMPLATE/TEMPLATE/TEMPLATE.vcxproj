@@ -32,6 +32,7 @@
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="FollowActor.cpp" />
     <ClCompile Include="FollowCameraComponent.cpp" />
+    <ClCompile Include="Font.cpp" />
     <ClCompile Include="FPSActor.cpp" />
     <ClCompile Include="FPSCameraComponent.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -70,12 +71,14 @@
     <ClInclude Include="BackgroundSpriteComponent.h" />
     <ClInclude Include="CameraComponent.h" />
     <ClInclude Include="CircleCollisionComponent.h" />
+    <ClInclude Include="Color.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="ControllerState.h" />
     <ClInclude Include="Cube.h" />
     <ClInclude Include="DirectionalLight.h" />
     <ClInclude Include="FollowActor.h" />
     <ClInclude Include="FollowCameraComponent.h" />
+    <ClInclude Include="Font.h" />
     <ClInclude Include="FPSActor.h" />
     <ClInclude Include="FPSCameraComponent.h" />
     <ClInclude Include="Game.h" />

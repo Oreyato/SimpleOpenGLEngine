@@ -20,6 +20,8 @@ public:
 	inline int getWidth() const { return width; }
 	inline int getHeight() const { return height; }
 
+	void createFromSurface(struct SDL_Surface* surface);
+
 private:
 	unsigned int textureID;
 	string filename;
