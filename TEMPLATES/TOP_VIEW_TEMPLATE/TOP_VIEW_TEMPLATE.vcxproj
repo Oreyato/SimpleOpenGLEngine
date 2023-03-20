@@ -125,10 +125,10 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{2b3264a7-3afb-4122-b32a-44b1f1acc6f3}</ProjectGuid>
+    <ProjectGuid>{FE529475-CA51-4B6D-B1FF-18A4792DBA96}</ProjectGuid>
     <RootNamespace>TEMPLATE</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>FPS_TPS_TEMPLATE</ProjectName>
+    <ProjectName>TOP_VIEW_TEMPLATE</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
