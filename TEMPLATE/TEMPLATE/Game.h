@@ -11,6 +11,10 @@
 
 using std::vector;
 
+enum class GameState {
+	MainMenu, Gameplay, Pause, Quit
+};
+
 class Game
 {
 public:
@@ -26,7 +30,7 @@ public:
 	Game& operator=(Game&&) = delete;
 
 private:
-	Game() : isRunning(true), isUpdatingActors(false), fps(nullptr), follow(nullptr) {}
+	Game() : state(GameState::Gameplay), isRunning(true), isUpdatingActors(false), fps(nullptr), follow(nullptr) {}
 
 public:
 	bool initialize();
@@ -35,11 +39,18 @@ public:
 	void unload();
 	void close();
 
+	GameState getState() const { return state; }
+	void setState(GameState stateP);
+
 	void addActor(Actor* actor);
 	void removeActor(Actor* actor);
 	RendererOGL& getRenderer() { return renderer; }
 	AudioSystem& getAudioSystem() { return audioSystem; }
+	InputSystem& getInputSystem() { return inputSystem; }
 
+	//v Game specifics ===============================================
+
+	//^ Game specifics ===============================================
 
 private:
 	void processInput();
@@ -47,6 +58,7 @@ private:
 	void render();
 
 	bool isRunning;
+	GameState state;
 	Window window;
 	RendererOGL renderer;
 	AudioSystem audioSystem;
@@ -56,11 +68,13 @@ private:
 	vector<Actor*> actors;
 	vector<Actor*> pendingActors;
 
-	// Game specific
+	//v Game specifics ===============================================
 	void changeCamera(int mode);
 
 	SoundEvent musicEvent;
 	class FPSActor* fps;
 	class FollowActor* follow;
+
+	//^ Game specifics ===============================================
 };
 

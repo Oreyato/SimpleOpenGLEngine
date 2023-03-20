@@ -147,28 +147,34 @@ void Game::processInput()
 	inputSystem.update();
 	const InputState& input = inputSystem.getInputState();
 
-	// Escape: quit game
-	if (input.keyboard.getKeyState(SDL_SCANCODE_ESCAPE) == ButtonState::Released)
+	//v Game states ==================================================
+	if (state == GameState::Gameplay)
 	{
-		isRunning = false;
+		// Escape: quit game
+		if (input.keyboard.getKeyState(SDL_SCANCODE_ESCAPE) == ButtonState::Released)
+		{
+			isRunning = false;
+		}
+
+		if (input.keyboard.getKeyState(SDL_SCANCODE_1) == ButtonState::Pressed)
+		{
+			changeCamera(1);
+		}
+		else if (input.keyboard.getKeyState(SDL_SCANCODE_2) == ButtonState::Pressed)
+		{
+			changeCamera(2);
+		}
+
+		// Actor input
+		isUpdatingActors = true;
+		for (auto actor : actors)
+		{
+			actor->processInput(input);
+		}
+		isUpdatingActors = false;
 	}
 
-	if (input.keyboard.getKeyState(SDL_SCANCODE_1) == ButtonState::Pressed)
-	{
-		changeCamera(1);
-	}
-	else if (input.keyboard.getKeyState(SDL_SCANCODE_2) == ButtonState::Pressed)
-	{
-		changeCamera(2);
-	}
-
-	// Actor input
-	isUpdatingActors = true;
-	for (auto actor : actors)
-	{
-		actor->processInput(input);
-	}
-	isUpdatingActors = false;
+	//^ Game states ==================================================
 }
 
 void Game::update(float dt)
@@ -176,34 +182,37 @@ void Game::update(float dt)
 	// Update audio
 	audioSystem.update(dt);
 
-	// Update actors 
-	isUpdatingActors = true;
-	for(auto actor: actors) 
+	if (state == GameState::Gameplay)
 	{
-		actor->update(dt);
-	}
-	isUpdatingActors = false;
-
-	// Move pending actors to actors
-	for (auto pendingActor: pendingActors)
-	{
-		pendingActor->computeWorldTransform();
-		actors.emplace_back(pendingActor);
-	}
-	pendingActors.clear();
-
-	// Delete dead actors
-	vector<Actor*> deadActors;
-	for (auto actor : actors)
-	{
-		if (actor->getState() == Actor::ActorState::Dead)
+		// Update actors 
+		isUpdatingActors = true;
+		for (auto actor : actors)
 		{
-			deadActors.emplace_back(actor);
+			actor->update(dt);
 		}
-	}
-	for (auto deadActor : deadActors)
-	{
-		delete deadActor;
+		isUpdatingActors = false;
+
+		// Move pending actors to actors
+		for (auto pendingActor : pendingActors)
+		{
+			pendingActor->computeWorldTransform();
+			actors.emplace_back(pendingActor);
+		}
+		pendingActors.clear();
+
+		// Delete dead actors
+		vector<Actor*> deadActors;
+		for (auto actor : actors)
+		{
+			if (actor->getState() == Actor::ActorState::Dead)
+			{
+				deadActors.emplace_back(actor);
+			}
+		}
+		for (auto deadActor : deadActors)
+		{
+			delete deadActor;
+		}
 	}
 }
 
@@ -271,6 +280,11 @@ void Game::close()
 	audioSystem.close();
 	window.close();
 	SDL_Quit();
+}
+
+void Game::setState(GameState stateP)
+{
+	state = stateP;
 }
 
 void Game::addActor(Actor* actor)
