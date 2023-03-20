@@ -106,6 +106,19 @@
     <ClInclude Include="VertexArray.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Res\Meshes\BasicMeshes\Cube.gpmesh" />
+    <None Include="Res\Meshes\BasicMeshes\Plane.gpmesh" />
+    <None Include="Res\Meshes\BasicMeshes\Sphere.gpmesh" />
+    <None Include="Res\Meshes\RacingCar.gpmesh" />
+    <None Include="Res\Meshes\Rifle.gpmesh" />
+    <None Include="Res\Shaders\BasicMesh.frag" />
+    <None Include="Res\Shaders\BasicMesh.vert" />
+    <None Include="Res\Shaders\Phong.frag" />
+    <None Include="Res\Shaders\Phong.vert" />
+    <None Include="Res\Shaders\Sprite.frag" />
+    <None Include="Res\Shaders\Sprite.vert" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
