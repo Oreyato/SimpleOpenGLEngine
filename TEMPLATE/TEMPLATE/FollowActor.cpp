@@ -12,8 +12,8 @@ FollowActor::FollowActor() :
 	meshComponent(nullptr)
 {
 	meshComponent = new MeshComponent(this);
-	meshComponent->setMesh(Assets::getMesh("Mesh_RacingCar"));
-	setPosition(Vector3(0.0f, 0.0f, -100.0f));
+	meshComponent->setMesh(Assets::getMesh("Mesh_Sphere"));
+	setPosition(Vector3(0.0f, 0.0f, -90.0f));
 
 	moveComponent = new MoveComponent(this);
 	cameraComponent = new FollowCameraComponent(this);
