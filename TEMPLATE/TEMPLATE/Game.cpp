@@ -24,10 +24,12 @@ void Game::load()
 {
 	inputSystem.setMouseRelativeMode(true);
 
+	// SHADERS ==============================
 	Assets::loadShader("Res\\Shaders\\Sprite.vert", "Res\\Shaders\\Sprite.frag", "", "", "", "Sprite");
 	Assets::loadShader("Res\\Shaders\\Phong.vert", "Res\\Shaders\\Phong.frag", "", "", "", "Phong");
 	Assets::loadShader("Res\\Shaders\\BasicMesh.vert", "Res\\Shaders\\BasicMesh.frag", "", "", "", "BasicMesh");
 
+	// TEXTURES =============================
 	Assets::loadTexture(renderer, "Res\\Textures\\Default.png", "Default");
 	Assets::loadTexture(renderer, "Res\\Textures\\Cube.png", "Cube");
 	Assets::loadTexture(renderer, "Res\\Textures\\HealthBar.png", "HealthBar");
@@ -38,9 +40,12 @@ void Game::load()
 	Assets::loadTexture(renderer, "Res\\Textures\\RacingCar.png", "RacingCar");
 	Assets::loadTexture(renderer, "Res\\Textures\\Rifle.png", "Rifle");
 
-	Assets::loadMesh("Res\\Meshes\\Cube.gpmesh", "Mesh_Cube");
-	Assets::loadMesh("Res\\Meshes\\Plane.gpmesh", "Mesh_Plane");
-	Assets::loadMesh("Res\\Meshes\\Sphere.gpmesh", "Mesh_Sphere");
+	// MESHES ===============================
+	// -- Basic meshes --
+	Assets::loadMesh("Res\\Meshes\\BasicMeshes\\Cube.gpmesh", "Mesh_Cube");
+	Assets::loadMesh("Res\\Meshes\\BasicMeshes\\Plane.gpmesh", "Mesh_Plane");
+	Assets::loadMesh("Res\\Meshes\\BasicMeshes\\Sphere.gpmesh", "Mesh_Sphere");
+	// -- Game specific meshes --
 	Assets::loadMesh("Res\\Meshes\\Rifle.gpmesh", "Mesh_Rifle");
 	Assets::loadMesh("Res\\Meshes\\RacingCar.gpmesh", "Mesh_RacingCar");
 
@@ -112,7 +117,7 @@ void Game::load()
 	AudioComponent* ac = new AudioComponent(soundSphere);
 	ac->playEvent("event:/FireLoop");
 
-	// Corsshair
+	// Crosshair
 	Actor* crosshairActor = new Actor();
 	crosshairActor->setScale(2.0f);
 	crosshair = new SpriteComponent(crosshairActor, Assets::getTexture("Crosshair"));
