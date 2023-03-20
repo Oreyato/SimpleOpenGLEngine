@@ -1,3 +1,6 @@
+#include <GL/glew.h>
+#include <SDL_image.h>
+
 #include "RendererOGL.h"
 #include "Rectangle.h"
 #include "Assets.h"
@@ -6,18 +9,16 @@
 #include "MeshComponent.h"
 #include "Log.h"
 
-#include <GL/glew.h>
-#include <SDL_image.h>
 
 RendererOGL::RendererOGL():
-	window(nullptr),
-	context(nullptr),
-	spriteVertexArray(nullptr),
-	spriteViewProj(Matrix4::createSimpleViewProj(WINDOW_WIDTH, WINDOW_HEIGHT)),
-	view(Matrix4::createLookAt(Vector3::zero, Vector3::unitX, Vector3::unitZ)),
-	projection(Matrix4::createPerspectiveFOV(Maths::toRadians(70.0f), WINDOW_WIDTH, WINDOW_HEIGHT, 10.0f, 10000.0f)),
-	ambientLight(Vector3(1.0f, 1.0f, 1.0f)),
-	dirLight({ Vector3::zero, Vector3::zero, Vector3::zero })
+	window{ nullptr },
+	context{ nullptr },
+	spriteVertexArray{ nullptr },
+	spriteViewProj{ Matrix4::createSimpleViewProj(WINDOW_WIDTH, WINDOW_HEIGHT) },
+	view{ Matrix4::createLookAt(Vector3::zero, Vector3::unitX, Vector3::unitZ) },
+	projection{ Matrix4::createPerspectiveFOV(Maths::toRadians(70.0f), WINDOW_WIDTH, WINDOW_HEIGHT, 10.0f, 10000.0f) },
+	ambientLight{ Vector3(1.0f, 1.0f, 1.0f) },
+	dirLight( { Vector3::zero, Vector3::zero, Vector3::zero } )
 {
 }
 
