@@ -8,6 +8,7 @@
 #include "AudioSystem.h"
 #include "InputSystem.h"
 
+
 using std::vector;
 
 class Game
@@ -25,7 +26,7 @@ public:
 	Game& operator=(Game&&) = delete;
 
 private:
-	Game() : isRunning(true), isUpdatingActors(false), fps(nullptr), crosshair(nullptr), follow(nullptr) {}
+	Game() : isRunning(true), isUpdatingActors(false), fps(nullptr), follow(nullptr) {}
 
 public:
 	bool initialize();
@@ -60,7 +61,6 @@ private:
 
 	SoundEvent musicEvent;
 	class FPSActor* fps;
-	class SpriteComponent* crosshair;
 	class FollowActor* follow;
 };
 

@@ -1,4 +1,4 @@
-#include "Game.h"
+﻿#include "Game.h"
 #include "Actor.h"
 #include "Timer.h"
 #include "Assets.h"
@@ -9,6 +9,7 @@
 #include "AudioComponent.h"
 #include "FPSActor.h"
 #include "FollowActor.h"
+
 
 bool Game::initialize()
 {
@@ -24,30 +25,35 @@ void Game::load()
 {
 	inputSystem.setMouseRelativeMode(true);
 
+	//v =============================================================╗
+	//v Load Shaders/Textures/Meshes                                 ║
+
 	// SHADERS ==============================
 	Assets::loadShader("Res\\Shaders\\Sprite.vert", "Res\\Shaders\\Sprite.frag", "", "", "", "Sprite");
 	Assets::loadShader("Res\\Shaders\\Phong.vert", "Res\\Shaders\\Phong.frag", "", "", "", "Phong");
 	Assets::loadShader("Res\\Shaders\\BasicMesh.vert", "Res\\Shaders\\BasicMesh.frag", "", "", "", "BasicMesh");
 
 	// TEXTURES =============================
+	// -- Basic textures --
 	Assets::loadTexture(renderer, "Res\\Textures\\Default.png", "Default");
 	Assets::loadTexture(renderer, "Res\\Textures\\Cube.png", "Cube");
-	Assets::loadTexture(renderer, "Res\\Textures\\HealthBar.png", "HealthBar");
 	Assets::loadTexture(renderer, "Res\\Textures\\Plane.png", "Plane");
-	Assets::loadTexture(renderer, "Res\\Textures\\Radar.png", "Radar");
 	Assets::loadTexture(renderer, "Res\\Textures\\Sphere.png", "Sphere");
-	Assets::loadTexture(renderer, "Res\\Textures\\Crosshair.png", "Crosshair");
-	Assets::loadTexture(renderer, "Res\\Textures\\RacingCar.png", "RacingCar");
-	Assets::loadTexture(renderer, "Res\\Textures\\Rifle.png", "Rifle");
+
+	// -- Game specific textures --
 
 	// MESHES ===============================
 	// -- Basic meshes --
 	Assets::loadMesh("Res\\Meshes\\BasicMeshes\\Cube.gpmesh", "Mesh_Cube");
 	Assets::loadMesh("Res\\Meshes\\BasicMeshes\\Plane.gpmesh", "Mesh_Plane");
 	Assets::loadMesh("Res\\Meshes\\BasicMeshes\\Sphere.gpmesh", "Mesh_Sphere");
+
 	// -- Game specific meshes --
-	Assets::loadMesh("Res\\Meshes\\Rifle.gpmesh", "Mesh_Rifle");
-	Assets::loadMesh("Res\\Meshes\\RacingCar.gpmesh", "Mesh_RacingCar");
+
+	//^ Load Shaders/Textures/Meshes                                 ║
+	//^ =============================================================╝
+	//v =============================================================╗
+	//v Place actors                                                 ║
 
 	fps = new FPSActor();
 	follow = new FollowActor();
@@ -63,9 +69,9 @@ void Game::load()
 	b->setPosition(Vector3(200.0f, -75.0f, 0.0f));
 	b->setScale(3.0f);
 
-	// Floor and walls
 
-	// Setup floor
+	//v Place floor / walls ==========================================
+	// Setup floor ==========================
 	const float start = -1250.0f;
 	const float size = 250.0f;
 	for (int i = 0; i < 10; i++)
@@ -77,7 +83,7 @@ void Game::load()
 		}
 	}
 
-	// Left/right walls
+	// Left/right walls =====================
 	q = Quaternion(Vector3::unitX, Maths::piOver2);
 	for (int i = 0; i < 10; i++)
 	{
@@ -91,7 +97,8 @@ void Game::load()
 	}
 
 	q = Quaternion::concatenate(q, Quaternion(Vector3::unitZ, Maths::piOver2));
-	// Forward/back walls
+
+	// Forward/back walls ===================
 	for (int i = 0; i < 10; i++)
 	{
 		Plane* p = new Plane();
@@ -102,6 +109,9 @@ void Game::load()
 		p->setPosition(Vector3(-start + size, start + i * size, 0.0f));
 		p->setRotation(q);
 	}
+
+	//^ Place actors                                                 ║
+	//^ =============================================================╝
 
 	// Setup lights
 	renderer.setAmbientLight(Vector3(0.2f, 0.2f, 0.2f));
@@ -116,11 +126,6 @@ void Game::load()
 	soundSphere->setScale(1.0f);
 	AudioComponent* ac = new AudioComponent(soundSphere);
 	ac->playEvent("event:/FireLoop");
-
-	// Crosshair
-	Actor* crosshairActor = new Actor();
-	crosshairActor->setScale(2.0f);
-	crosshair = new SpriteComponent(crosshairActor, Assets::getTexture("Crosshair"));
 
 	// Start music
 	musicEvent = audioSystem.playEvent("event:/Music");
@@ -214,7 +219,6 @@ void Game::changeCamera(int mode)
 	// Disable everything
 	fps->setState(Actor::ActorState::Paused);
 	fps->setVisible(false);
-	crosshair->setVisible(false);
 	follow->setState(Actor::ActorState::Paused);
 	follow->setVisible(false);
 
@@ -225,7 +229,6 @@ void Game::changeCamera(int mode)
 	default:
 		fps->setState(Actor::ActorState::Active);
 		fps->setVisible(true);
-		crosshair->setVisible(true);
 		break;
 	case 2:
 		follow->setState(Actor::ActorState::Active);
