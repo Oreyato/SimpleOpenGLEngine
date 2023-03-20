@@ -1,6 +1,7 @@
 #pragma once
 #include "Vector3.h"
 
+
 namespace Color
 {
 	static const Vector3 BLACK{ 0.0f, 0.0f, 0.0f };

@@ -1,7 +1,10 @@
 #pragma once
 #include <string>
+
 #include "RendererOGL.h"
+
 using std::string;
+
 
 class Texture
 {

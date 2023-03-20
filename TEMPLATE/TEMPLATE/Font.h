@@ -2,9 +2,12 @@
 #include <string>
 #include <unordered_map>
 #include <SDL_ttf.h>
+
 #include "Vector3.h"
 #include "Color.h"
+
 using std::string;
+
 
 class Font
 {

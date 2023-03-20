@@ -1,7 +1,10 @@
 #include "Texture.h"
-#include "Log.h"
+
 #include <SDL_image.h>
 #include <sstream>
+
+#include "Log.h"
+
 
 Texture::Texture(): textureID(0), filename(""), width(0), height(0), SDLTexture(nullptr)
 {

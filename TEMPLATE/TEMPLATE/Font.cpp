@@ -1,7 +1,10 @@
 #include "Font.h"
+
+#include <sstream>
+
 #include "Log.h"
 #include "Texture.h"
-#include <sstream>
+
 
 Font::Font()
 {
