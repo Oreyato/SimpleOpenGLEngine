@@ -78,7 +78,7 @@ void Game::load()
 	//^ =============================================================╝
 
 	// Top view camera
-	renderer.setViewMatrix(Matrix4::createLookAt(Vector3{0.0f, 0.0f, 1500.0f}, Vector3::unitX, Vector3::unitZ));
+	renderer.setViewMatrix(Matrix4::createLookAt(Vector3{0.0f, 0.0f, 1500.0f}, Vector3::negUnitY, Vector3::unitZ));
 
 	// Setup lights
 	renderer.setAmbientLight(Vector3(0.2f, 0.2f, 0.2f));
